@@ -4,20 +4,31 @@
 ## API调用地址及格式
 Restful API url 格式为: [https://api.skynology.com/1.0/login](https://api.skynology.com/1.0/login) . 
 
-其中 `https://api.skynology.com`为跟域名,  ` 1.0 ` 为当前API版本号, ` login ` 为具体功能地址. 详细功能参考 [API列表](#API列表)
+其中 `https://api.skynology.com`为跟域名,  ` 1.0 ` 为当前API版本号, ` login ` 为具体功能地址. 详细功能参考 [API列表](#api_list)
 
 <br>
 ## 注意事项
 * 所有API调用数据格式均为 `JSON`. 需设置http头 `Content-Type : application/json`
 * 所有API调用需设置http头 `X-SKCloud-Application-Id : <项目对应的applicationId>`
-* 所有API调用需要传入签名, 设置http头 ` X-SKCloud-Request-Sign : <签名内容> `, 详情参考 [签名相关文档](#签名)
+* 所有API调用需要传入签名, 设置http头 ` X-SKCloud-Request-Sign : <签名内容> `, 详情参考 [签名相关文档](#signature)
 * 当用户登陆后, 需传入session字段, 以便识别. 设置http头 ` X-SKCloud-Session-Token : <session 内容>`
 
 <br>
+<a name="api_list"></a>
 ## API列表
 
+<a name="api_list_resource"></a>
+### [资源操作相关](#resource)
+URL|Method|Description
+---|------|-----------
+resources/\<resourceName>|POST|创建对象
+resources/\<resourceName>|GET|查询对象
+resources/\<resourceName>/\<objectId>|GET|获取对象
+resources/\<resourceName>/\<objectId>|PUT|更新对象
+resources/\<resourceName>/\<objectId>|DELETE|删除对象
 
-### 用户相关
+<a name="api_list_user"></a>
+### [用户相关](#user)
 URL|Method|Description
 ---|------|-----------
 users|POST|注册用户
@@ -27,7 +38,8 @@ users/\<objectId>/resetPassword|PUT|修改登录密码
 users/\<objectId>|DELETE|删除用户
 login|POST|登陆账号
 
-### 角色相关
+<a name="api_list_role"></a>
+### [角色相关](#role)
 URL|Method|Description
 ---|:------:|-----------
 roles|POST|创建角色
@@ -36,32 +48,26 @@ roles/\<objectId>|GET|获取角色
 roles/\<objectId>|PUT|更新角色
 roles/\<objectId>|DELETE|删除角色
 
-### 资源操作相关
-URL|Method|Description
----|------|-----------
-resources/\<resourceName>|POST|创建对象
-resources/\<resourceName>|GET|查询对象
-resources/\<resourceName>/\<objectId>|GET|获取对象
-resources/\<resourceName>/\<objectId>|PUT|更新对象
-resources/\<resourceName>/\<objectId>|DELETE|删除对象
-
-### 文件相关
+<a name="api_list_file"></a>
+### [文件相关](#file)
 URL|Method|Description
 ---|------|-----------
 files/fetchFromURL|POST|发送邮件
 
-
-### 邮件相关
+<a name="api_list_email"></a>
+### [邮件相关](#email)
 URL|Method|Description
 ---|------|-----------
 email/\<objectId>|POST|发送邮件
 
-### 统计数据相关
+<a name="api_list_statistics"></a>
+### [统计数据相关](#statistics)
 URL|Method|Description
 ---|------|-----------
 statistics/api|GET|查询API调用统计信息
 
 <br>
+<a name="signature"></a>
 ## 签名
 
 所有的API调用都需要传入http头 签名信息, 也就是 ` X-SKCloud-Request-Sign `, 其值的格式为 ` timestamp,sign[,master] ` .
@@ -113,15 +119,17 @@ statistics/api|GET|查询API调用统计信息
 
 
 <br>
+<a name="resource"></a>
 ## 资源操作
 
 假设您在后台创建了一个 Resource, 用于存放活动相关数据 资源名为: `event`.
 
 
 
+<a name="resource_post"></a>
 ### 创建对象
 
-当创建对象时, 发送一个 `POST` 请求到资源对应的URL即可, 内容为相对应的JSON数据. 如:
+当创建对象时, 发送一个 `POST` 请求到资源对应的URL(`https://api.skynology.com/1.0/event`)即可, 内容为相对应的JSON数据. 如:
 
 ```
 {
@@ -149,6 +157,7 @@ statistics/api|GET|查询API调用统计信息
 Location: https://api.skynology.com/1.0/resources/event/5458e2c39d40a827f9000001
 ```
 
+<a name="resource_put"></a>
 ### 更新对象
 需要更新对象数据时, 可发送一个PUT请求到对象对应的URL上, 如: `https://api.skynology.com/1.0/resources/event/5458e2c39d40a827f9000001`.
 
@@ -167,7 +176,7 @@ Location: https://api.skynology.com/1.0/resources/event/5458e2c39d40a827f9000001
 	"updatedAt": "2015-01-04T10:08:21:001Z"
 }
 ```
-
+<a name="resource_put_increment"></a>
 #### 计数器
 可对任何数字字段做增加(Inrement) 或 减少(Decrement) 操作.
 如我们想更新上面活动的报名人数, 可按如下格式PUT数据即可.
@@ -182,6 +191,7 @@ Location: https://api.skynology.com/1.0/resources/event/5458e2c39d40a827f9000001
 * "__op": "Increment" 为固定需要.
 * "amont"为递增/递减的数值. 也可是其他数值, 如: -1, 可递减1位.
 
+<a name="resource_put_array"></a>
 #### 数组
 为方便操作数组类型字段, 可用下面几种操作来更新.
 
@@ -201,21 +211,25 @@ Location: https://api.skynology.com/1.0/resources/event/5458e2c39d40a827f9000001
 * "__op" 为操作类型, "AddUnique" 代表操作类型, 我们也可传"Add"或"Remove".
 * "objects" 为需要增加/删除的值, 需数组类型. 比如上面我们增加两个VIP票 500, 1000时, 就以数组格式传入.
 
+<a name="resource_put_relation"></a>
 #### 关系
 关系(Relation)类型其实是一个 `objectId`数组, 所以相关操作参考上面数组即可.
 
-
+<a name="resource_delete"></a>
 ### 删除对象
 删除一个对象时, 发送一个DELETE请求到对象对应的URL上即可. 如删除上面的活动对象, 可发送DELETE请求到
  `https://api.skynology.com/1.0/resources/event/5458e2c39d40a827f9000001` 上即可.
 
 删除成功后会返回一个JSON对象. 包括 "objectId" 及 "deletedAt" 字段.
 
-<br>
 
+
+<br>
+<a name="query"></a>
 ## 查询
 查询一个 resource 时可发送一个GET请求到URL即可, 如对上面活动做查询时, 可发送GET请求到 `https://api.skynology.com/1.0/resources/event `
 
+<a name="query_where"></a>
 ### 查询条件
 查询时可传一个编码过的JSON字符串到, 传到URL的where参数上. where参数兼容 MongoDB 查询参数.
 
@@ -283,7 +297,7 @@ https://api.skynology.com/1.0/resources/event?where={joinUserCount:{"$gte":30}}
 ```
 https://api.skynology.com/1.0/resources/event?where={startTime:{"$gte":"2015-01-01T00:00:01:001Z"},endTime:{"$gte":"2015-01-07T23:59:59:999Z"}}
 ```
-
+<a name="query_order"></a>
 ### 排序
 可在查询URL上增加 `order=字段名` 来做排序, 若需多个字段来排序, 用逗号`,`来分割字段名即可. 字段名前增加负号 `-` 可倒序. 如:
 
@@ -305,7 +319,7 @@ https://api.skynology.com/1.0/resources/event?where={joinUserCount:{"$gte":20}}&
 https://api.skynology.com/1.0/resources/event?where={joinUserCount:{"$gte":20}}&order=-startTime,-joinUserCount
 ``` 
 
-
+<a name="query_select"></a>
 ### 获取指定字段
 
 若您不想获取所有字段, 只想要指定的字段, 可传入 `select` 字段即可. 如下面查询将只返回活动标题及描述. 其他字段将不返回.
@@ -313,7 +327,7 @@ https://api.skynology.com/1.0/resources/event?where={joinUserCount:{"$gte":20}}&
 ```
 https://api.skynology.com/1.0/resources/event?select=name,description
 ``` 
-
+<a name="query_skip"></a>
 ### 分页
 可用 `skip` 及 `take` 来做分页操作, 其中 `take` 取值范围需在 1 ~ 1000之内. 
 
@@ -328,7 +342,7 @@ https://api.skynology.com/1.0/resources/event?take=30
 https://api.skynology.com/1.0/resources/event?skip=60&take=30
 ``` 
 
-
+<a name="query_count"></a>
 ### 对象总数
 当我们用 `skip` 及 `take` 做分页查询时, 通常也需要所查询对象的总匹配数. 我们只需要查询时传入 `count=1` 参数即可.
 
