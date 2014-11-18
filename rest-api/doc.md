@@ -654,6 +654,26 @@ http header 有传 `X-SKCloud-Session-Token`才可修改, 必如我们要更新�
 	 谢谢!
 ```
 
+邮件默认以上空云邮件系统发出(no-reply@skynology.com), 如果您有自己的邮件发送服务器(smtp), 可在上面POST时增加以下字段, 系统将调用您的邮件服务器来发送电邮.
+
+```
+{
+	"username": "<您邮件系统登陆名>",
+	"password": "<您邮件系统登陆密码>",
+	"host": "<邮件系统SMTP地址>",
+	"port": "<SMTP服务器端口号>",
+	"from", "<发件邮箱账号>",		// 如果不传, 将取username值
+	"to": ["user1@skynology.com", "user2@skynology.com"],
+	"bcc": ["user8@skynology.com"], // 支持密件抄送列表
+	"data": {
+		"project": "上空云",
+		"user": "William",
+		"url": "http:/www.skynology.com/xxxx/xxxxxxxx-xxx-xxx"
+	}
+}
+```
+
+
 > 另邮件内容以 `HTML` 格式发送, 所以可以模板中带有HTML标记.
 
 
@@ -691,5 +711,3 @@ API调用数据直接关系到大家的 `$`. 所以相信大家也会非常关�
 ....
 ]
 ```
-
-
