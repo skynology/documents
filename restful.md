@@ -480,26 +480,11 @@ http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上�
 若您不希望用上空云提供的验证页面, 可在上面的JSON中加自定义字段 `link` 来覆盖系统提供的默认验证地址, 系统会在link所对应的URL后面增加三个参数 `applicationId`, `email`, `token`. 如
 `http://mycustomurl.com?applicationId=<当前项目ID>&email=<上面JSON对应的邮箱>&token=<验证码>`.
 
-当您需要做验证时,可向 `https://skynology/api/1.0/verifyEmail?applicationId=<applicatioId>` 发送一个PUT请求, 请求JSON内容为上面URL里接收到的参数, 其中email及token为必须字段.
+当您需要做验证时,可向 `https://skynology/api/1.0/verifyEmail` 发送一个PUT请求, 请求JSON内容为上面URL里接收到的参数, 其中email及token为必须字段.
 
 
 >  模板中的 {{link}}, {{project}} 两个占位符为保留字段, 会在系统后台自动填充。 可随意调整在模板中的位置.
 
-### 申请修改密码
-当需要修改密码时, 可发送POST请求到 `https://skynology/api/1.0/users/<objectId>/requestResetPassword`, 请求成功后, 系统将发送重设邮件到指定用户的邮箱中.
-
-```json
-{
-	"customField": "若是自定义的模板， 可在此增加替换占位符的字段"
-}
-```
-当调用验证用户邮箱时, 系统会从后台邮件模板列表(`_EmailTemplate`)中查找 `name` 为 `resetPassword` 的模板, 并且找到上面URL中<objectId>对应的用户邮箱地址， 发送电邮 . 占位符相关知识请看 [发送邮件](#发送邮件). 
-如果您有修改过模板, 并增加了自定义占位符, 请在上面JSON对象中增加相对应的字段.
-
-若您不希望使用上空云提供的重设密码页面, 可在上面的JSON中加自定义字段 `link` 来覆盖系统提供的默认验证地址, 系统会在link所对应的URL后面增加三个参数 `applicationId`, `email`, `token`. 如
-`http://mycustomurl.com?applicationId=<当前项目ID>&email=<上面JSON对应的邮箱>&token=<验证码>`.
-
-若在您自定义的验证程序中, 需要做验证时,可向 `https://skynology/api/1.0/resetPassword?applicationId=<applicatioId>` 发送一个PUT请求, 请求JSON内容为上面URL里接收到的参数以及新密码字段 `password`, 其中email, token 以及 password 为必须字段.
 
 ### 删除用户
 删除用户时, 发送一个DELETE请求到用户URL即可. 如删除上面用户时, 可发送DELETE到 `https://skynology/api/1.0/users/546576929d40a80551000002` .
