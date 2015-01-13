@@ -1,4 +1,6 @@
 # 上空云服务 IOS SDK 使用文档
+上空云服务 IOS SDK是针对我们的 [Restful API](http://developer.skynology.com/restful-api.html)进行的一个包装。 以方便大家写IOS程序时调用。 整个类库是用 `Objective-C` 语言来编写。 并以开源方式放到我们的 [github库](https://github.com/skynology/objc-sdk) 中。 若大家使用当中有什么问题或建议， 请联系我们。若对类库有贡献代码， 请直接 `Fork` 并且 push 到 `develop` 分支下。
+
 
 ## 安装
 
@@ -21,10 +23,10 @@ pod install
 ### 手动安装
 因我们的各类SDK是以开源方式来提供的， 所以您当然可以直接下载源码到您的项目中。当您在使用时有什么的好的想法， 也希望您不要 "客气"， 直接修改源码， push代码到d `develop` 分支上。
 
-人点击链接 : [上空云IOS SDK源码包](https://githubc.com/skynology/ios-sdk)来下载， 解压缩下载包后， 将其中的`Skynology`文件夹复制到您的项目文件中即可使用了。
+人点击链接 : [上空云IOS SDK源码包](https://githubc.com/skynology/objc-sdk)来下载， 解压缩下载包后， 将其中的`Skynology`文件夹复制到您的项目文件中即可使用了。
 
 
-### 初始化
+### 初始化SDK
 
 当安装完成后， 需要在您的 `AppDelegate` 中的 引用 `SkyClient` 文件。
 
@@ -40,7 +42,7 @@ SkyClient *client = [SkyClient sharedClient];
 
 ```
 
-> 如果还不知道 `applicationId` 及 `applicationKey`， 可先阅读 [基础概念]() 以及 [控制台使用说明]()。
+> 如果还不知道 `applicationId` 及 `applicationKey`， 可先阅读 [基础概念](http://developer.skynology.com/getting-started.html) 以及 [控制台使用说明](http://developer.skynology.com/console-tutorial.html)。
 
 
 ## 对象
@@ -54,7 +56,7 @@ SkyClient *client = [SkyClient sharedClient];
 * `createdAt` 及 `updatedAt`: 对象创建时间及最后更新时间。
 * `resourceName`: 当前对象对应的资源类名。(一般是您初始化`SkyObject`时传入的。) 
 
-### 初始化
+### 初始化对象
 使用 `SkyObject` 类时， 需在你当前的Controller中引用 `SkyObject.h` 文件。如:
 
 ```objectivec
@@ -111,19 +113,19 @@ SkyObject *object = [[SkyObject allow] initWithResourceName: @"MyUser" objectId:
 #### 数组字段
 当您需要更新数组字段时， 除了上面的直接设置 `setValue`方式去覆盖外， 也可以用下面提供的几个方法去更新数组内的值。
 
-* 用 `addValueToArray` 方法去追加一个值到数组字段内。 此方法不检查唯一性， 也就是你所要增加的值已经存在于数组字段内，也会把值成功追加进去。
+用 `addValueToArray` 方法去追加一个值到数组字段内。 此方法不检查唯一性， 也就是你所要增加的值已经存在于数组字段内，也会把值成功追加进去。
 
 ```objectivec
 [object addValueToArray:@"java" forField:@"likes"];
 ```
 
-* 用 `addUniqueValueToArray` 方法。 此方法会先检查值的唯一性， 若数组字段中已经存在当前值， 将不会重复增加。
+用 `addUniqueValueToArray` 方法。 此方法会先检查值的唯一性， 若数组字段中已经存在当前值， 将不会重复增加。
 
 ```objectivec
 [object addUniqueValueToArray:@"python" forField:@"likes"];
 ```
 
-* 用 `removeValueFromArray` 方法从数组字段中删除一个值。如下面命令将会从 `likes` 字段中删除 `golang` 这个值。
+用 `removeValueFromArray` 方法从数组字段中删除一个值。如下面命令将会从 `likes` 字段中删除 `golang` 这个值。
 
 ```objectivec
 [object removeValueFromArray:@"golang" forField:@"likes"];
@@ -322,6 +324,20 @@ query.count = true;
 
 当设置完所有选项后，我们用 `findObjectsWithBlock` 方法来获取对象。
 
+```objectivec
+[query findObjectsWithBlock:^(NSArray *objects, NSNumber *count, NSError *error) {
+	// objects 内默认是返回 'SkyObject' 类型。
+}];
+```
+
+上面的查询方法内的 `objects` 默认是返回 `SkyObject`对象类型。 但我可以设置 query 的 `resultType` 来拿到想拿的类型。
+比如要返回 `SkyUser` 类型时， 需设置:
+
+```objectivec
+query.resultType = SkyQueryResultTypeUser;
+
+```
+
 
 
 
@@ -388,3 +404,17 @@ user.phone = @"18600000000";
 SkyUser *user = [SkyUser currentUser];
 
 ```
+
+### 删除用户
+因 `SkyUser` 是继承自 `SkyObject`, 所以删除时， 可直接用 `SkyObject` 的 `removeWithBlock` 方法。
+
+```objectivec
+[user removeWithBlock:^(BOOL successed, NSError *error) {
+    // 相关参数同保存时相同。 successed 代表删除是否成功。 
+    // 若删除失败 error 将会返回失败信息。
+}];
+```
+
+
+## 角色
+我们不太建议在SDK中去操作角色， 因为关系到整个系统的权限问题。 所以您可以在管理后台操作或用 [Restful API](http://developer.skynology.com/restful-api.html#角色) 来操作角色。
