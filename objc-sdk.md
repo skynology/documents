@@ -21,7 +21,7 @@ pod install
 > 此时可先把源换成 **淘宝** 提供的源。 再执行命令时， 增加参数 `--no-repo-update`。 详细说明可参考 segmentfault 上对应讨论: [cocoapods慢如何解决](http://segmentfault.com/q/1010000000434890) 。
 
 ### 手动安装
-因我们的各类SDK是以开源方式来提供的， 所以您当然可以直接下载源码到您的项目中。当您在使用时有什么的好的想法， 也希望您不要 "客气"， 直接修改源码， push代码到d `develop` 分支上。
+因我们的各类SDK是以开源方式来提供的， 所以您当然可以直接下载源码到您的项目中。
 
 人点击链接 : [上空云IOS SDK源码包](https://githubc.com/skynology/objc-sdk)来下载， 解压缩下载包后， 将其中的`Skynology`文件夹复制到您的项目文件中即可使用了。
 
