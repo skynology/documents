@@ -1,7 +1,7 @@
-# 上空云 RESTFUL API 文档
+# 上空云 RESTful API 文档
 
-## API调用地址及格式
-Restful API URL 格式为: [https://skynology.com/api/1.0/login](https://skynology/api/1.0/login) . 
+## API地址格式
+RESTful API URL 格式为: [https://skynology.com/api/1.0/login](https://skynology/api/1.0/login) . 
 
 其中 `https://skynology.com/api`为跟域名,  ` 1.0 ` 为当前API版本号, ` login ` 为具体功能地址. 详细功能参考 [API列表](#API列表)
 
