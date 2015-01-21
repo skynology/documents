@@ -1,7 +1,7 @@
 # 上空云 RESTful API 文档
 
 ## API地址格式
-RESTful API URL 格式为: [https://skynology.com/api/1.0/login](https://skynology/api/1.0/login) . 
+RESTful API URL 格式为: [https://skynology.com/api/1.0/login](https://skynology.com/api/1.0/login) . 
 
 其中 `https://skynology.com/api`为跟域名,  ` 1.0 ` 为当前API版本号, ` login ` 为具体功能地址. 详细功能参考 [API列表](#API列表)
 
@@ -186,7 +186,7 @@ statistics/api|GET|查询API调用统计信息
 ### 创建对象
 假设您在后台创建了一个 Resource, 用于存放活动相关数据 资源名为: `event`.
 
-当创建对象时, 发送一个 `POST` 请求到资源对应的URL(`https://skynology/api/1.0/event`)即可, 内容为相对应的JSON数据. 如:
+当创建对象时, 发送一个 `POST` 请求到资源对应的URL(`https://skynology.com/api/1.0/event`)即可, 内容为相对应的JSON数据. 如:
 
 ```json
 {
@@ -211,11 +211,11 @@ statistics/api|GET|查询API调用统计信息
 另在HTTP header中返回一个Location的字段, 内容为刚创建对象的HTTP地址, 如:
 
 ```html
-Location: https://skynology/api/1.0/resources/event/5458e2c39d40a827f9000001
+Location: https://skynology.com/api/1.0/resources/event/5458e2c39d40a827f9000001
 ```
 
 ### 更新对象
-需要更新对象数据时, 可发送一个PUT请求到对象对应的URL上, 如: `https://skynology/api/1.0/resources/event/5458e2c39d40a827f9000001`.
+需要更新对象数据时, 可发送一个PUT请求到对象对应的URL上, 如: `https://skynology.com/api/1.0/resources/event/5458e2c39d40a827f9000001`.
 
 假设要更新上面 `event` 对象的 active为false. 直接PUT相关的数据.
 
@@ -273,13 +273,13 @@ Location: https://skynology/api/1.0/resources/event/5458e2c39d40a827f9000001
 
 ### 删除对象
 删除一个对象时, 发送一个DELETE请求到对象对应的URL上即可. 如删除上面的活动对象, 可发送DELETE请求到
- `https://skynology/api/1.0/resources/event/5458e2c39d40a827f9000001` 上即可.
+ `https://skynology.com/api/1.0/resources/event/5458e2c39d40a827f9000001` 上即可.
 
 删除成功后会返回一个JSON对象. 包括 "objectId" 及 "deletedAt" 字段.
 
 
 ## 查询
-查询一个 resource 时可发送一个GET请求到URL即可, 如对上面活动做查询时, 可发送GET请求到 `https://skynology/api/1.0/resources/event `
+查询一个 resource 时可发送一个GET请求到URL即可, 如对上面活动做查询时, 可发送GET请求到 `https://skynology.com/api/1.0/resources/event `
 
 <a id="query_where" data-title="查询条件" data-parent="query"></a>
 ### 查询条件
@@ -287,7 +287,7 @@ Location: https://skynology/api/1.0/resources/event/5458e2c39d40a827f9000001
 
 通常查询匹配时可直接传对应的键值即可. 如我们要查询所有开放中的活动, 可传以下URL.
 
-`https://skynology/api/1.0/resources/event?where={active:true}`
+`https://skynology.com/api/1.0/resources/event?where={active:true}`
 
 查询成功后将返回一个JSON对象, 其中 `results` 字段将包含查询结果, 具体格式如下:
 
@@ -341,13 +341,13 @@ $all|包含所有给定的值
 查询报名人数大于等于30人的活动
 
 ```
-https://skynology/api/1.0/resources/event?where={joinUserCount:{"$gte":30}}
+https://skynology.com/api/1.0/resources/event?where={joinUserCount:{"$gte":30}}
 ```
 
 查询举行时间在 `2015-01-01` 至 `2015-01-07` 其间的活动.
 
 ```
-https://skynology/api/1.0/resources/event?where={startTime:{"$gte":"2015-01-01T00:00:01:001Z"},endTime:{"$gte":"2015-01-07T23:59:59:999Z"}}
+https://skynology.com/api/1.0/resources/event?where={startTime:{"$gte":"2015-01-01T00:00:01:001Z"},endTime:{"$gte":"2015-01-07T23:59:59:999Z"}}
 ```
 <a id="query_order" data-title="排序" data-parent="query"></a>
 ### 排序
@@ -356,19 +356,19 @@ https://skynology/api/1.0/resources/event?where={startTime:{"$gte":"2015-01-01T0
 查询报名人数大于20人, 并用开始时间由近到远排序, 可写为如下:
 
 ```
-https://skynology/api/1.0/resources/event?where={joinUserCount:{"$gte":20}}&order=startTime
+https://skynology.com/api/1.0/resources/event?where={joinUserCount:{"$gte":20}}&order=startTime
 ``` 
 若按远到近排序, 可写为:
 
 
 ```
-https://skynology/api/1.0/resources/event?where={joinUserCount:{"$gte":20}}&order=-startTime
+https://skynology.com/api/1.0/resources/event?where={joinUserCount:{"$gte":20}}&order=-startTime
 ``` 
 若同一天有多个活动, 再按人数多到少排序:
 
 
 ```
-https://skynology/api/1.0/resources/event?where={joinUserCount:{"$gte":20}}&order=-startTime,-joinUserCount
+https://skynology.com/api/1.0/resources/event?where={joinUserCount:{"$gte":20}}&order=-startTime,-joinUserCount
 ``` 
 
 ### 获取指定字段
@@ -376,7 +376,7 @@ https://skynology/api/1.0/resources/event?where={joinUserCount:{"$gte":20}}&orde
 若您不想获取所有字段, 只想要指定的字段, 可传入 `select` 字段即可. 如下面查询将只返回活动标题及描述. 其他字段将不返回.
 
 ```
-https://skynology/api/1.0/resources/event?select=name,description
+https://skynology.com/api/1.0/resources/event?select=name,description
 ``` 
 
 
@@ -386,12 +386,12 @@ https://skynology/api/1.0/resources/event?select=name,description
 如每获取30条活动记录, 可:
 
 ```
-https://skynology/api/1.0/resources/event?take=30
+https://skynology.com/api/1.0/resources/event?take=30
 ``` 
 获取第三页的30条记录:
 
 ```
-https://skynology/api/1.0/resources/event?skip=60&take=30
+https://skynology.com/api/1.0/resources/event?skip=60&take=30
 ``` 
 
 
@@ -399,7 +399,7 @@ https://skynology/api/1.0/resources/event?skip=60&take=30
 当我们用 `skip` 及 `take` 做分页查询时, 通常也需要所查询对象的总匹配数. 我们只需要查询时传入 `count=1` 参数即可.
 
 ```
-https://skynology/api/1.0/resources/event?skip=60&take=30&count=1
+https://skynology.com/api/1.0/resources/event?skip=60&take=30&count=1
 ``` 
 查询成功后在返回的JSON对象中的 `count` 字段值为总匹配数量.
 
@@ -417,12 +417,12 @@ https://skynology/api/1.0/resources/event?skip=60&take=30&count=1
 用户相关操作除了 [注册用户](#注册用户) 和 [登陆](#登陆) 外, 其他操作都需要带 `X-SKY-Session-Token` 来确定用户身份.
 
 ### 注册用户
-注册用户时, 只需发送POST请求到用户资源URL(`https://skynology/api/1.0/users`)上即可.
+注册用户时, 只需发送POST请求到用户资源URL(`https://skynology.com/api/1.0/users`)上即可.
 
 注册用户时 `username` 及 `password` 字段是必须有值的. `username`字段上有唯一索引, 所有注册已经有的用户名时会返回错误.
 `password` 字段我们会在后台进一步加密, 并且前台API查询时不会返回`password`.
 
-注册一个新用户, 可向 `https://skynology/api/1.0/users` 发送如下字段即可.
+注册一个新用户, 可向 `https://skynology.com/api/1.0/users` 发送如下字段即可.
 
 ```json
 {
@@ -432,7 +432,7 @@ https://skynology/api/1.0/resources/event?skip=60&take=30&count=1
 	"email": "username@skynology.com"
 }
 ```
-请求成功后, 返回的http状态和资源操作一样, 为:201. 并会有一个http header `Location:https://skynology/api/1.0/users/546576929d40a80551000002`.
+请求成功后, 返回的http状态和资源操作一样, 为:201. 并会有一个http header `Location:https://skynology.com/api/1.0/users/546576929d40a80551000002`.
 
 返回的内容一个JSON对象. 包含 `objectId`, `createdAt`, `sessionToken` 三个字段. 
 
@@ -446,7 +446,8 @@ https://skynology/api/1.0/resources/event?skip=60&take=30&count=1
 
 其中 `sessionToken` 为用户在后台的session标识. 可以每次API 请求时在 http header 中设置 `X-SKY-Session-Token: 5a0593c3d551f9f5b830c07a1d321cf03f3acec3`, 以便后台判断用户并做相对应的授权.
 
-登陆用户账号时, 发送POST请求到 `https://skynology/api/1.0/login`. 请求内容需是一个包含 `username` 及 `password` 字段的JSON数据. 如:
+### 用户登录
+登陆用户账号时, 发送POST请求到 `https://skynology.com/api/1.0/login`. 请求内容需是一个包含 `username` 及 `password` 字段的JSON数据. 如:
 
 ```json
 {
@@ -457,9 +458,18 @@ https://skynology/api/1.0/resources/event?skip=60&take=30&count=1
 
 登陆成功后会返回包含 用户的 `objectId`, `createdAt`, `updatedAt` 及 `sessionToken` 字段的JSON对象.
 
+### 用户登出
+当退出用户登录时，发送POST请求到 `https://skynology.com/api/1.0/logout`。请求内容包含当前需登出用户的 `objectId` 字段。 并且 HTTP Header 中设置 `X-Sky-Session-Token` 值。
+
+```json
+{
+	"objectId": "546576929d40a80551000002"
+}
+```
+
 ### 更新用户
 更新用户信息时, 直接PUT需要更新的字段到用户的URL上, 并且需要登陆用户才可修改, 所以同时需要 
-http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上面用户的手机号, 可PUT如下JSON到 `https://skynology/api/1.0/users/546576929d40a80551000002`:
+http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上面用户的手机号, 可PUT如下JSON到 `https://skynology.com/api/1.0/users/546576929d40a80551000002`:
 
 ```json
 {
@@ -476,7 +486,7 @@ http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上�
 ```
 
 ### 修改密码
-用户密码是不允许直接更新来做修改的. 需要更新时, 需要POST旧密码及新密码到 `https://skynology/api/1.0/users/<objectId>/resetPassword` 即可. 如:
+用户密码是不允许直接更新来做修改的. 需要更新时, 需要POST旧密码及新密码到 `https://skynology.com/api/1.0/users/<objectId>/resetPassword` 即可. 如:
 
 ```json
 {
@@ -486,7 +496,7 @@ http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上�
 ```
 
 ### 申请验证邮箱
-当需要验证用户邮箱时, 发送POST请求到 `https://skynology/api/1.0/users/<objectId>/requestVerifyEmail`.
+当需要验证用户邮箱时, 发送POST请求到 `https://skynology.com/api/1.0/users/<objectId>/requestVerifyEmail`.
 
 ```json
 {
@@ -500,14 +510,14 @@ http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上�
 若您不希望用上空云提供的验证页面, 可在上面的JSON中加自定义字段 `link` 来覆盖系统提供的默认验证地址, 系统会在link所对应的URL后面增加三个参数 `applicationId`, `email`, `token`. 如
 `http://mycustomurl.com?applicationId=<当前项目ID>&email=<上面JSON对应的邮箱>&token=<验证码>`.
 
-当您需要做验证时,可向 `https://skynology/api/1.0/verifyEmail` 发送一个PUT请求, 请求JSON内容为上面URL里接收到的参数, 其中email及token为必须字段.
+当您需要做验证时,可向 `https://skynology.com/api/1.0/verifyEmail` 发送一个PUT请求, 请求JSON内容为上面URL里接收到的参数, 其中email及token为必须字段.
 
 
 >  模板中的 {{link}}, {{project}} 两个占位符为保留字段, 会在系统后台自动填充。 可随意调整在模板中的位置.
 
 
 ### 删除用户
-删除用户时, 发送一个DELETE请求到用户URL即可. 如删除上面用户时, 可发送DELETE到 `https://skynology/api/1.0/users/546576929d40a80551000002` .
+删除用户时, 发送一个DELETE请求到用户URL即可. 如删除上面用户时, 可发送DELETE到 `https://skynology.com/api/1.0/users/546576929d40a80551000002` .
 
 ## 角色
 做过各种系统的用户都会碰到 `角色`, 不管您是做ERP还CMS等, 一般都会碰到用角色来授权用户. 角色可以是一个特定的划分, 包含一个或多个用户, 比如一般系统都会有一个角色叫 `admin`, 用来做一些高安全性的操作. 
@@ -517,7 +527,7 @@ http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上�
 > 角色涉及项目安全及用户权限相关, 所以建议直接在我们管理后台去操作或由Rest API来操作. 若有需求放到前台或其他客户端去操作时需谨慎.
 
 ### 创建角色
-创建角色, 可POST数据到 `https://skynology/api/1.0/roles`.
+创建角色, 可POST数据到 `https://skynology.com/api/1.0/roles`.
 
 ```json
 {
@@ -530,10 +540,10 @@ http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上�
 	"users": ["546576929d40a80551000002", "546576929d40a80551000003", "546576929d40a80551000004"]
 }
 ```
-当创建成功时, 返回的http状态码为 201. http header 中带roles的URL `Location: https://skynology/api/1.0/roles/5458e0da9d40a82718000001`.
+当创建成功时, 返回的http状态码为 201. http header 中带roles的URL `Location: https://skynology.com/api/1.0/roles/5458e0da9d40a82718000001`.
 
 ### 获取角色
-获取角色信息可发送一个GET请求到角色的URL上, 如上面创建时返回的Location地址 `Location: https://skynology/api/1.0/roles/5458e0da9d40a82718000001` 将会返回角色的JSON信息.
+获取角色信息可发送一个GET请求到角色的URL上, 如上面创建时返回的Location地址 `Location: https://skynology.com/api/1.0/roles/5458e0da9d40a82718000001` 将会返回角色的JSON信息.
 
 ```json
 {
@@ -558,7 +568,7 @@ http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上�
 ### 更新角色
 更新角色时可发送PUT请求到角色URL. 角色字段中的 `users` 及 `parents` 为 Relation 类型, 所以更新时, 可参考 [更新数组对象](#数组) .
 
-若我们把 `546576929d40a80551000009`这个用户加入到`Admin`数组中. 可发送如下JSON到 `https://skynology/api/1.0/roles/5458e0da9d40a82718000001`.
+若我们把 `546576929d40a80551000009`这个用户加入到`Admin`数组中. 可发送如下JSON到 `https://skynology.com/api/1.0/roles/5458e0da9d40a82718000001`.
 
 ```json
 {
@@ -568,7 +578,7 @@ http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上�
 
 <a id="role_delete" data-title="删除角色" data-parent="role"></a>
 ### 删除角色
-删除角色时, 发送DELETE请求到角色的URL. 如删除上面 `Admin` 角色时, 发送 DELETE 到 `https://skynology/api/1.0/roles/5458e0da9d40a82718000001`.
+删除角色时, 发送DELETE请求到角色的URL. 如删除上面 `Admin` 角色时, 发送 DELETE 到 `https://skynology.com/api/1.0/roles/5458e0da9d40a82718000001`.
 
 ## 文件
 文件服务我们选择第三方平台: [七牛](http://www.qiniu.com), 为国内存储行业一线平台. 
@@ -576,7 +586,7 @@ http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上�
 ### 获取上传Token
 上传文件到七牛平台时, 需要设置上传凭证, 详细概念可参考 [上传凭证（UploadToken）](http://developer.qiniu.com/docs/v6/api/overview/security.html) .
 
-在上空云, 您可以发送GET请求到 `https://skynology/api/1.0/files/token` 获取上传相关信息.
+在上空云, 您可以发送GET请求到 `https://skynology.com/api/1.0/files/token` 获取上传相关信息.
 请求成功后将返回如下JSON对象:
 
 ```json
@@ -593,7 +603,7 @@ http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上�
 
 ### 删除文件
 删除文件时, 发送DELETE请求到文件对应的资源URL(不是文件存储于七牛的URL)即可. 如:
-`https://skynology/api/1.0/files/646576929d40a80551000001`.
+`https://skynology.com/api/1.0/files/646576929d40a80551000001`.
 
 ## 邮件
 多数项目都会涉及到发送邮件的功能, 不管是账号激活, 密码验证 或者是发送邮件通知等. 所以上空云给大空提供了发送邮件功能.
@@ -606,7 +616,7 @@ http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上�
 * `subject`: 为邮件标题模板
 * `content`: 邮件内容模板.
 
-比如我们要创建一个模板, 可POST请求到 `https://skynology/api/1.0/resources/_EmailTemplate`. 如:
+比如我们要创建一个模板, 可POST请求到 `https://skynology.com/api/1.0/resources/_EmailTemplate`. 如:
 
 ```json
 {
@@ -616,10 +626,10 @@ http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上�
 				谢谢!"
 }
 ```
-创建成功后, 将同其他资源对象创建一样, 返回包含 `objectId` 及 `createdAt`, `updatedAt` 的JSON对象. 并会在http header 中邮件模板的URL. `Location: https://skynology/api/1.0/resources/_EmailTemplate/946576929d40a80551000001`
+创建成功后, 将同其他资源对象创建一样, 返回包含 `objectId` 及 `createdAt`, `updatedAt` 的JSON对象. 并会在http header 中邮件模板的URL. `Location: https://skynology.com/api/1.0/resources/_EmailTemplate/946576929d40a80551000001`
 
 ### 发送电邮
-当在已经创建了邮件模板后, 可POST一个JSON数据到 `https://skynology/api/1.0/email/send/<objectId>`. JSON对象中的字段, 将会替换模板中的占位符. 比如上面创建的这个用户账号激活的邮件, 可发送POST请求到模板的URL上. `https://skynology/api/1.0/email/946576929d40a80551000001`.
+当在已经创建了邮件模板后, 可POST一个JSON数据到 `https://skynology.com/api/1.0/email/send/<objectId>`. JSON对象中的字段, 将会替换模板中的占位符. 比如上面创建的这个用户账号激活的邮件, 可发送POST请求到模板的URL上. `https://skynology.com/api/1.0/email/946576929d40a80551000001`.
 
 ```json
 {
@@ -651,7 +661,7 @@ http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上�
 API调用数据直接关系到大家的 `$`. 所以相信大家也会非常关心此信息.
 我们会在每日凌晨 1点到4间某一时间统计前一天的各种API调用情况. 并生成报表, 存于系统中. 
 
-查询API统计信息, 可发送GET请求到 `https://skynology/api/1.0/statistics/api`. 此功能接受两个参数, `startDate` 和 `endDate`. 参数类型为日期格式, 如 `2015-01-01`., 比如我们要查询1号到7号的API调用数据. 可GET请求: `https://skynology/api/1.0/statistics/api?startDate=2015-01-01&endDate=2015-01-07`.
+查询API统计信息, 可发送GET请求到 `https://skynology.com/api/1.0/statistics/api`. 此功能接受两个参数, `startDate` 和 `endDate`. 参数类型为日期格式, 如 `2015-01-01`., 比如我们要查询1号到7号的API调用数据. 可GET请求: `https://skynology.com/api/1.0/statistics/api?startDate=2015-01-01&endDate=2015-01-07`.
 
 查询成功后, 将返回:
 
