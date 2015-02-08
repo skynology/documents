@@ -30,6 +30,7 @@ Array|数组型|JSON 数组， 可包含我们所有支持的所有类型
 ACL|权限描述类型|Access Control List. 对对象的访问权限说明。 参考 [ACL说明](#ACL)
 Pointer|对象关联类型|存放另外一个Object 的 objectId 字段。方便做类似传统数据库的外键关联。
 Relation|对象关联列表|特殊数组类型， 存放Pointer字段。也就是一个以 objectId 组成的列表。
+GeoJSON|地理位置|GeoJSON为表示地理位置信息的JSON对象。参考 [GeoJSON Spec](http://geojson.org/geojson-spec.html)
 
 
 #### 默认字段
