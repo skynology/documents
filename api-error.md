@@ -27,6 +27,10 @@
 * 信息: ``` Permission denied ```
 * 含义: 无权限操作
 
+###  11
+* 信息: ``` Operation aborted ```
+* 含义: 操作失败, 一般为系统内部原因
+
 ### 30
 * 信息: ``` Project name is missing or empty ```
 * 含义: 没有提供项目名称, 或项目名称为空

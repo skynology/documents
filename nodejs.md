@@ -6,7 +6,7 @@
 ### 使用NPM安装
 使用如下命令可用 npm 来把SDK安装到您的项目中。
 
-```javascript
+```go
 npm install skynology --save
 ```
 
@@ -79,7 +79,7 @@ obj.increment('followCount', 5);
 obj.increment('followCount', -1);
 
 
-// 关注人数减一
+// 关注人数减5
 obj.increment('followCount', -5);
 ```
 

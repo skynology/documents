@@ -47,7 +47,7 @@ SkyClient *client = [SkyClient sharedClient];
 
 ## 对象
 
-`SkyObject` 类是用来操作 `对象`。 `SkyObject` 所操作的资源类， 需在 [管理后台](https://console.skynology.com) 中已经创建过的。 若未在后台创建的类， 在保存，更新， 删除等操作时， 将直接返回操作代码。
+`SkyObject` 类是用来操作 `对象`。 `SkyObject` 所操作的资源类， 需在 [管理后台](https://console.skynology.com) 中已经创建过的。 若未在后台创建的类， 在保存，更新， 删除等操作时， 将直接返回错误码。
 
 如同 `基础概念` 中讲的一样， 对象有几个默认字段。 在 `SkyObject` 中有一些默认属性。如下:
 
