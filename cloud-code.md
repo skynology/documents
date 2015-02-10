@@ -35,7 +35,9 @@ function YourCloudCode(app *skynology.App, req *CloudRequest, h *Helper) {
 
 可在项目管理后台云代码功能区设置自定义函数。
 ![自定义函数列表](http://7tebuf.com2.z0.glb.qiniucdn.com/cloud-code/func.jpg?imageView/2/h/300)
+
 当新增或编辑函数时， 在代码编辑页面上部是函数名及函数描述。 函数名必须由英文字母组成。 描述只用于描述你创建函数的用途， 便于区分。
+
 ![函数编辑](http://7tebuf.com2.z0.glb.qiniucdn.com/cloud-code/function-editor.jpg?imageView/2/h/300)
 
 当写完函数内云代码后， 需先保存到服务器。 再发布到云代码服务器后才生效。
