@@ -1,5 +1,5 @@
 # 云代码使用说明
-我们在后台提供了简易的云代码功能。 分`hook`及`自定义函数`两类。 云代码为目前只支持Go语言版本。
+我们在后台提供了简易的云代码功能。 分`hook`及`自定义函数`两类。 云代码目前只支持Go语言版本。
 
 ## Hook
 `Hook`为操作Resource时的自定义逻辑。 如保存前后，更新前后及删除前后等。 当你设置了云代码后， 系统将自动在您进行各类操作时调用。   
@@ -27,8 +27,6 @@ function YourCloudCode(app *skynology.App, req *CloudRequest, h *Helper) {
 	// 这里是你在管理后台写的云代码。
 
 }
-
-
 ```
 
 
@@ -71,13 +69,13 @@ type CloudRequest struct {
 type CloudSession struct {
 
 	// Session 用户Id
-	UserId string `json:"userId"`
+	UserId string 
 
 	// 是否以Master Key权限调用
-	Master bool `json:"master"`
+	Master bool
 
-	// 用户角色
-	Roles []string `json:"roles"`
+	// 用户角色列表
+	Roles []string
 }
 ```
 
@@ -110,7 +108,7 @@ h.Protect(fieldName string)
 ```
 当设置了Protect的字段无法进行更新修改。 
 
-如只允许用户修改自己账户的密码, 可在Resource(_User)`的更新前`hook中设置:
+如只允许用户修改自己账户的密码, 可在Resource(_User)的`更新前`hook中设置:
 
 ```go
 if req.Session.UserId != req.ObjectId {
@@ -138,6 +136,15 @@ if req.Session.UserId != req.ObjectId {
 }
 // 若这里还有其他代码， 上面的Cancel后需跟return， 以防止执行全部代码。
 ```
+此时RESTful服务器将返回错误码给用户，http状态码为:400。 内容如下:
+
+```json
+{
+	"code": -1,
+	"error": "您没有权限修改其他用户的账户密码"
+}
+```
+
 
 ### CancelWithCode
 同Cancel， 只是多了自定义Code.
