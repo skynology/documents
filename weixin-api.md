@@ -15,7 +15,7 @@
 [订阅/服务号开发文档](http://mp.weixin.qq.com/wiki/home/index.html)
 
 ## 绑定微信公众号
-若需要使用微信相关API时, 先在我们的[管理台](#console-tutorial.html)绑定您的公众号信息. 如下图:
+若需要使用微信相关API时, 先在我们的[管理台](#console-tutorial.html)绑定您的公众号信息. 如下图:    
 ![微信绑定](http://7tebuf.com2.z0.glb.qiniucdn.com/console-tutorial/wechat-setting.jpg?imageView/2/h/200)
 
 在绑定时需注意几个地方.如上图中:   
