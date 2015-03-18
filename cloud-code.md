@@ -63,6 +63,9 @@ type CloudRequest struct {
 	// Post 或 Put 等操作时前台传入的值或Get要返回的对象
 	Data map[string]interface{} 
 
+	// 一些特殊情况下需交互的数据, 如微信服务器POST过来的XML数据, 将以字符串形式传到云代码服务器.
+	ExtraData string 
+
 	// 用户操作时的Session对象
 	Session map[string] 
 }
@@ -172,4 +175,7 @@ h.Log(message string)
 h.Render(data interface{})
 ```
 
-*只在自定义函数中可用。 在所有Hook中无法使用此方法*
+*此方法无法在资源Hook中使用.*
+
+## 微信相关
+微信相关云代码, 可参考 [微信平台接入指南](/weixin-api.html).
