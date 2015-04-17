@@ -43,6 +43,24 @@ function YourCloudCode(app *skynology.App, req *CloudRequest, h *Helper) {
 当写完函数内云代码后， 需先保存到服务器。 再发布到云代码服务器后才生效。
 > 函数名在创建过后不允许再修改。 若有此需求， 请另增加一个函数即可。
 
+**云代码返回的JSON格式固定, 需注意**:
+
+```json
+{
+	"result": "此处是您在云代码中Render的内容"
+}
+```
+
+`result`内容可以是任意的JSON数据, 如下面的都是可以的:
+
+```json
+{
+	// 云代码中 : h.Render(map[string]string{"test":"ok"}), 则自定义函数返回:
+	"result": {"test":"ok"}
+}
+```
+
+
 自定义函数发布后， 可调用RESTfulAPI的基础地址+'functions/{name}'来调用。如我们调用上面的calendar函数时, 可往下面地址发送一个GET请求即可。 
 
 ```http

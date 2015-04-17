@@ -27,9 +27,17 @@
 * 信息: ``` Permission denied ```
 * 含义: 无权限操作
 
-###  11
-* 信息: ``` Operation aborted ```
-* 含义: 操作失败, 一般为系统内部原因
+###  10
+* 信息: ``` Permission denied ```
+* 含义: 无权限操作
+
+###  15
+* 信息: ``` ip blocked ```
+* 含义: IP被锁定
+
+###  16
+* 信息: ``` user blocked ```
+* 含义: 账户被拒绝
 
 ### 30
 * 信息: ``` Project name is missing or empty ```
