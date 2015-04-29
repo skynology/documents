@@ -27,9 +27,9 @@
 * 信息: ``` Permission denied ```
 * 含义: 无权限操作
 
-###  10
-* 信息: ``` Permission denied ```
-* 含义: 无权限操作
+###  11
+* 信息: ``` Operation aborted ```
+* 含义: 操作失败
 
 ###  15
 * 信息: ``` ip blocked ```

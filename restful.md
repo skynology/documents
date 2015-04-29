@@ -32,8 +32,10 @@ users|POST|注册用户
 users/\<objectId>|GET|获取用户
 users/\<objectId>|PUT|更新用户
 users/\<objectId>/resetPassword|PUT|修改登录密码
+users/\<objectId>/state|PUT|禁用/启用用户账户
 users/\<objectId>|DELETE|删除用户
 login|POST|登陆账号
+logout|POST|登出账号
 requestResetPassword|POST|申请修改密码邮件
 requestVerifyEmail|POST|申请验证邮箱邮件
 
@@ -115,8 +117,6 @@ map/district|GET|行政区划查询
 ```
 
 更多错误代码, 可参考: [错误代码列表](http://doc.skynology.com/api-errors.html)
-
-
 
 ## 资源操作
 在上空云中的用户可创建多个资源(resource),  每个资源类中可创建多个对象(object). 每个对象可有多个字段(column). 
@@ -266,6 +266,7 @@ Location: https://skynology.com/api/1.0/resources/event/5458e2c39d40a827f9000001
 * Add: 增加一个值到指定的数组字段, 可重复.
 * AddUnique: 增加一个值到数组内, 只有此值不存在于原数组内, 才会添加到数组内.
 * Remove: 从数组内删除指定的值.
+* RemoveObject: [删除数组内对象](#删除数组内对象). 
 
 若我们想给上面的活动的增加两个VIP门票价格, 可PUT一个如下JSON.
 
@@ -279,7 +280,16 @@ Location: https://skynology.com/api/1.0/resources/event/5458e2c39d40a827f9000001
 * "__op" 为操作类型, "AddUnique" 代表操作类型, 我们也可传"Add"或"Remove".
 * "objects" 为需要增加/删除的值, 需数组类型. 比如上面我们增加两个VIP票 500, 1000时, 就以数组格式传入.
 
-#### 数组内对象
+#### 删除数组内对象
+如我们要从`skus`字段删除上面的 `skuId = 1` 的对象, 则可用下面的方法:
+
+```json
+{
+	"skus": {"__op":"RemoveObject", "query":{"skuId":1}}
+}
+```
+
+#### 更新数组内对象
 有时候我们的数据字段存放的是一些json对象. 如下面是skus字段内的内容:
 
 ```json
@@ -308,6 +318,8 @@ Location: https://skynology.com/api/1.0/resources/event/5458e2c39d40a827f9000001
 	// "data": {"skus.$.qty": 50}
 }
 ```
+
+
 
 #### 关系
 关系(Relation)类型其实是一个 `objectId`数组, 所以相关操作参考上面数组相关方法即可. 但需注意数组内的值必须是 有效的`objectId`, 否则直接报类型不符错.
@@ -590,6 +602,20 @@ http header 有传 `X-SKY-Session-Token`才可修改, 必如我们要更新上�
 	"new_password": "123456789"
 }
 ```
+### 禁用或启用用户账户
+当创建用户时, 会有一个字段 `disabled`来记录当前账户状态. 默认 `disabled=false`. 为了阻止被用户自己修改. 此操作需`Master Key`来做签名.  
+若想修改此状态时, 发送PUT请求到 `https://skynology.com/api/1.0/users/<objectId>/state` 即可. 如:
+
+```json
+{
+	// 想禁用账户时
+	"disabled": true
+	
+	// 若想把禁用的账户重新启用
+	// "disabled": false
+}
+```
+当被禁用的账户默认无法发送`POST`,`PUT`以及`DELETE`请求. 但有`GET`请求权限. 并且有访问自定义函数的权限. 在云代码中的 req.Session.Disabled 为默认带上用户的状态, 可自行判断并使用.
 
 ### 申请验证邮箱
 当需要验证用户邮箱时, 发送POST请求到 `https://skynology.com/api/1.0/users/<objectId>/requestVerifyEmail`.
