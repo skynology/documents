@@ -45,34 +45,49 @@
 ### URL地址
 URL|Method|Sign|Description
 ---|------|----|-----------
-weixin/menu|GET|Master|获取菜单
-weixin/menu|POST|Master|创建菜单
-weixin/menu|DELETE|Master|删除菜单
-weixin/group|GET|Master|获取用户分组
-weixin/group| POST |Master|创建用户分组
-weixin/group|PUT|Master|更新用户分组
-weixin/group/users|POST|Master|移动用户分组
-weixin/group/users/batch|POST|Master|批量移动用户分组
-weixin/users| GET |Master|获取用户列表
-weixin/users/{openId}| GET |Master|获取用户基本信息
-weixin/users/updateremark|PUT|Master|设置备注名
-weixin/qrcode|POST| Master |创建二维码
-weixin/qrcode/fetch|POST|-|下载二维码并传到文件服务器
-weixin/shorturl|POST|-|长链接转短链接
-weixin/oauth2/url|POST|-|创建OAuth2调用URL, 用于获取code
-weixin/oauth2/token|POST|-|通过code换取网页授权access_token
-weixin/oauth2/refresh|POST|Master|刷新access_token
-weixin/oauth2/userinfo|POST|Master|拉取用户信息(需scope为 snsapi_userinfo)
-weixin/oauth2/check|POST|-|检验授权凭证（access_token）是否有效
-weixin/oauth2/login|POST|-|用上面换取到的code来登陆系统
-weixin/oauth2/signature|POST|-|获取JS SDK所需的signature
-weixin/template/industry|POST|Master|设置所属行业
-weixin/template|POST|Master|增加模板
-weixin/template/send|POST|Master|发送模板消息
-weixin/media/upload|POST|Master|抓取媒体文件到文件服务器
-weixin/news|POST|Master|上传图文消息素材
-weixin/mass/send/{to}|POST|Master|高级群发消息, {to}为群发类别, 比如 预览(preview), 分组(group), 按用户openId列表(list)等等值.
-weixin/mass/{msgId}|DELETE|Master|删除群发
+menu|GET|Master|获取菜单
+menu|POST|Master|创建菜单
+menu|DELETE|Master|删除菜单
+group|GET|Master|获取用户分组
+group| POST |Master|创建用户分组
+group|PUT|Master|更新用户分组
+group/users|POST|Master|移动用户分组
+group/users/batch|POST|Master|批量移动用户分组
+users| GET |Master|获取用户列表
+users/{openId}| GET |Master|获取用户基本信息
+users/updateremark|PUT|Master|设置备注名
+qrcode|POST| Master |创建二维码
+qrcode/fetch|POST|-|下载二维码并传到文件服务器
+shorturl|POST|-|长链接转短链接
+oauth2/url|POST|-|创建OAuth2调用URL, 用于获取code
+oauth2/token|POST|-|通过code换取网页授权access_token
+oauth2/refresh|POST|Master|刷新access_token
+oauth2/userinfo|POST|Master|拉取用户信息(需scope为 snsapi_userinfo)
+oauth2/check|POST|-|检验授权凭证（access_token）是否有效
+oauth2/login|POST|-|用上面换取到的code来登陆系统
+oauth2/signature|POST|-|获取JS SDK所需的signature
+template/industry|POST|Master|设置所属行业
+template|POST|Master|增加模板
+template/send|POST|Master|发送模板消息
+media/fetch|POST|Master|抓取媒体文件到文件服务器
+meterial|GET|Master|获取素材列表
+meterial/count|GET|Master|获取素材总数
+meterial/{meidaId}|DELETE| Master |删除指定素材
+meterial/news|POST|Master|新增永久图文素材
+meterial/news/{meidaId}|GET|Master|图文永久图文素材
+customservice/kfaccount|GET|Master|获取客服基本信息
+customservice/kfaccount/online|GET|Master|获取在线客服接待信息
+customservice/kfaccount|POST|Master|添加客服账号
+customservice/kfaccount|PUT|Master|设置客服信息
+customservice/kfaccount/{account}|DELETE|Master|删除客服账号
+customservice/kfsession|POST|Master|创建会话
+customservice/kfsession|PUT|Master|关闭会话
+customservice/kfsession/user/{openid}|GET|Master|获取客户的会话状态
+customservice/kfsession/list/{account}|GET|Master|获取客服的会话列表
+customservice/kfsession/wait|GET|Master|获取未接入会话列表
+customservice/msgrecord|POST|Master|获取客服聊天记录接口
+mass/send/{to}|POST|Master|高级群发消息, {to}为群发类别, 比如 预览(preview), 分组(group), 按用户openId列表(list)等等值.
+mass/{msgId}|DELETE|Master|删除群发
 
 ### 用户管理
 用户管理相关API内容都兼容微信官方API. 可参照上面的调用URL及官方参数格式调用.
@@ -269,32 +284,32 @@ code除了换取access_token以外, 也可以直接登陆上空云服务用户. 
 ### 企业号API调用URL
 URL|Method|Sign|Description
 ---|------|----|----------
-weixin/menu|GET|Master|获取菜单
-weixin/menu|POST|Master|创建菜单
-weixin/menu|DELETE|Master|删除菜单
-weixin/department|GET|Master|获取所有部门信息
-weixin/department/{departmentId}|GET|Master|获取指定部门信息
-weixin/department|POST|Master|创建部门
-weixin/department/{departmentId}|PUT|Master|修改指定部门信息
-weixin/department/{departmentId}|DELETE|Master|删除指定部门信息
-weixin/tag|GET|Master|获取标签信息
-weixin/tag|POST|Master|创建标签
-weixin/tag/{tagId}|PUT|Master|修改指定标签信息
-weixin/tag/{tagId}|DELETE|Master|删除指定标签
-weixin/tag/{tagId}/users|GET|Master|获取指定标签下的用户列表
-weixin/tag/{tagId}/users|POST|Master|增加用户到指定标签下
-weixin/tag/{tagId}/users|DELETE|Master|从指定标签下删除用户
-weixin/users/{userId}| GET |Master|获取用户基本信息
-weixin/users|POST|Master|新增用户
-weixin/users/{userId}|PUT|Master|修改用户
-weixin/users/{userId}|DELETE|Master|删除用户
-weixin/users|DELETE|Master|批量删除用户
-weixin/users/{userId}|POST|Master|邀请用户
-weixin/oauth2/url|POST|Master|创建OAuth2调用URL, 用于获取code
-weixin/oauth2/userinfo?agentId=&code=|GET|Master|通过code换取用户信息
-weixin/oauth2/signature|POST|-|获取JS签名
-weixin/message|POST|Master|发送消息
-weixin/media/fetch|POST|Master|上传媒体文件到文件服务器
+menu|GET|Master|获取菜单
+menu|POST|Master|创建菜单
+menu|DELETE|Master|删除菜单
+department|GET|Master|获取所有部门信息
+department/{departmentId}|GET|Master|获取指定部门信息
+department|POST|Master|创建部门
+department/{departmentId}|PUT|Master|修改指定部门信息
+department/{departmentId}|DELETE|Master|删除指定部门信息
+tag|GET|Master|获取标签信息
+tag|POST|Master|创建标签
+tag/{tagId}|PUT|Master|修改指定标签信息
+tag/{tagId}|DELETE|Master|删除指定标签
+tag/{tagId}/users|GET|Master|获取指定标签下的用户列表
+tag/{tagId}/users|POST|Master|增加用户到指定标签下
+tag/{tagId}/users|DELETE|Master|从指定标签下删除用户
+users/{userId}| GET |Master|获取用户基本信息
+users|POST|Master|新增用户
+users/{userId}|PUT|Master|修改用户
+users/{userId}|DELETE|Master|删除用户
+users|DELETE|Master|批量删除用户
+users/{userId}|POST|Master|邀请用户
+oauth2/url|POST|Master|创建OAuth2调用URL, 用于获取code
+oauth2/userinfo?agentId=&code=|GET|Master|通过code换取用户信息
+oauth2/signature|POST|-|获取JS签名
+message|POST|Master|发送消息
+media/fetch|POST|Master|上传媒体文件到文件服务器
 
 所以	API的参数已经兼容微信官方平台. 所以请参考上面的URL, 再看官方给出的参数调用户即可. 
 
