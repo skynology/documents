@@ -51,7 +51,9 @@ roles/\<objectId>|DELETE|删除角色
 ### 文件相关
 URL|Method|Description
 ---|------|-----------
-files/fetch|POST|发送邮件
+files/fetch|POST|抓取文件到服务器
+files/token|GET|获取上传token
+files/{objectId}/downloadURL|GET|获取私有空间文件下载地址
 
 ### 邮件相关
 URL|Method|Description
@@ -69,7 +71,7 @@ URL|Method|Description
 map/locationToAddress|GET|坐标转换地址
 map/addressToLocation|GET|地址转成坐标
 map/district|GET|行政区划查询
-
+map/staticmap|GET|生成静态图片
 ## 签名
 
 所有的API调用都需要传入http头 签名信息, 也就是 ` X-SKY-Request-Sign `, 其值的格式为 ` timestamp,sign[,master] ` .
@@ -928,3 +930,13 @@ location参数的是由[lat纬度,lng经度]组成. 除了location参数外, 还
 	....
 ]
 ```
+
+### 生成静态图
+有时候我们需要生成一张指定地址位置周围的静态图片. 此时我们发送GET请求到 `https://skynology.com/api/1.0/map/staticmap`即会返回静态图对应的URL.
+
+```json
+ {
+ 	"url": "http:/www.xxx.com/xxx/static?xxx"
+ }
+ 
+ ```
